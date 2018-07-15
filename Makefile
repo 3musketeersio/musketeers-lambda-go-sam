@@ -117,11 +117,6 @@ _deploy:
 		--parameter-overrides StageName=$(ENV) EchoMessage=$(ECHO_MESSAGE)
 .PHONY: _deploy
 
-# _echo calls the echo api endpoint
-_echo:
-	sls info -f echo | grep GET | cut -d' ' -f 5 | xargs curl
-.PHONY: _echo
-
 # _remove removes the aws stack
 _remove:
 	aws cloudformation delete-stack --stack-name $(STACK_NAME)

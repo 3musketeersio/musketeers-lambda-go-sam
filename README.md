@@ -30,12 +30,6 @@ $ make test
 $ make build pack
 # deploy to aws
 $ make deploy
-# you should see something like:
-#   endpoints:
-#     GET - https://xyz.execute-api.ap-southeast-2.amazonaws.com/dev/echo
-# request https://xyz.execute-api.ap-southeast-2.amazonaws.com/dev/echo
-$ make echo
-# "Thank you for using the 3 Musketeers!"
 # remove the aws stack (api gateway, lambda)
 $ make remove
 # clean your folder and docker
