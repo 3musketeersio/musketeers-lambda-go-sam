@@ -99,15 +99,12 @@ _build:
 	@for dir in $(wildcard functions/*/) ; do \
 		fxn=$$(basename $$dir) ; \
 		GOOS=linux go build -ldflags="-s -w" -o $(BIN_DIR)/$$fxn functions/$$fxn/*.go ; \
+		zip -m -D $(BIN_DIR)/$$fxn.zip $(BIN_DIR)/$$fxn ; \
 	done
 .PHONY: _build
 
 # _pack zips all binary functions individually and removes them
 _pack:
-	@for dir in $(wildcard functions/*/) ; do \
-		fxn=$$(basename $$dir) ; \
-		zip -m -D $(BIN_DIR)/$$fxn.zip $(BIN_DIR)/$$fxn ; \
-	done
 	aws cloudformation package --template-file template.yml --s3-bucket $(SAM_S3_BUCKET) --output-template-file packaged.yml
 .PHONY: _pack
 
@@ -117,7 +114,7 @@ _deploy:
 		--template-file ./packaged.yml \
 		--stack-name $(STACK_NAME) \
 		--capabilities CAPABILITY_IAM \
-		--parameter-overrides Stage=$(ENV) EchoMessage=$(ECHO_MESSAGE)
+		--parameter-overrides StageName=$(ENV) EchoMessage=$(ECHO_MESSAGE)
 .PHONY: _deploy
 
 # _echo calls the echo api endpoint

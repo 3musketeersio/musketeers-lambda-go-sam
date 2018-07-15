@@ -3,7 +3,7 @@ Transform: 'AWS::Serverless-2016-10-31'
 Description: Musketeers Lambda Go SAM
 
 Parameters:
-  Stage:
+  StageName:
     Type: String
     AllowedValues:
       - dev
@@ -20,7 +20,7 @@ Resources:
   Echo:
     Type: 'AWS::Serverless::Function'
     Properties:
-      FunctionName: !Ref AWS::StackName
+      FunctionName: !Sub ${AWS::StackName}-echo
       Description: returns the value of environment variable ECHO_MESSAGE
       MemorySize: 128
       CodeUri: ./bin/echo.zip
@@ -30,3 +30,20 @@ Resources:
       Environment:
         Variables:
           ECHO_MESSAGE: !Ref EchoMessage
+      Events:
+        Get:
+          Type: Api
+          Properties:
+            Method: GET
+            Path: /echo
+  APIStage:
+    Type: AWS::ApiGateway::Stage
+    Properties:
+      DeploymentId: !Ref ServerlessRestApi.Deployment
+      RestApiId: !Ref ServerlessRestApi
+      StageName: !Ref StageName
+
+Outputs:
+    EchoApi:
+      Description: !Sub API Gateway endpoint URL for ${StageName} stage for Echo function"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${StageName}/echo/"
