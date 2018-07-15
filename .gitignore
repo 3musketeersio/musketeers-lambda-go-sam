@@ -1,0 +1,8 @@
+vendor
+*.zip
+*.so
+bin
+.env*
+!.env.template
+!.env.example
+packaged.yml

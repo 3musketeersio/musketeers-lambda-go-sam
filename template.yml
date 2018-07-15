@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Musketeers Lambda Go SAM
+
+Parameters:
+  Stage:
+    Type: String
+    AllowedValues:
+      - dev
+      - qa
+      - prod
+  EchoMessage:
+    Type: String
+
+Globals:
+  Function:
+    Runtime: go1.x
+    
+Resources:
+  Echo:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: !Ref AWS::StackName
+      Description: returns the value of environment variable ECHO_MESSAGE
+      MemorySize: 128
+      CodeUri: ./bin/echo.zip
+      Handler: echo
+      Policies: 
+        - AWSLambdaFullAccess
+      Environment:
+        Variables:
+          ECHO_MESSAGE: !Ref EchoMessage
