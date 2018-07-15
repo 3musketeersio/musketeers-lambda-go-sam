@@ -61,6 +61,7 @@ deploy_dev:
     - master
   variables:
     ENV: dev
+    AWS_DEFAULT_REGION: ap-southeast-2
 
 deploy_qa:
   stage: deploy_qa
@@ -74,6 +75,7 @@ deploy_qa:
     - master
   variables:
     ENV: qa
+    AWS_DEFAULT_REGION: ap-southeast-2
 
 deploy_prod:
   stage: deploy_prod
@@ -88,3 +90,4 @@ deploy_prod:
     - master
   variables:
     ENV: prod
+    AWS_DEFAULT_REGION: ap-southeast-2
