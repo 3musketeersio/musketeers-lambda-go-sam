@@ -1,13 +1,14 @@
 BIN_DIR = bin
-GOLANG_DEPS_DIR = vendor
+
 COMPOSE_RUN_GOLANG = docker-compose run --rm golang
 COMPOSE_RUN_AWS = docker-compose run --rm aws
+
 STACK_NAME ?= $(ENV)-musketeers-lambda-go-sam
 SAM_S3_BUCKET ?= musketeers-lambda-go-sam
 
 # all is the default Make target. it installs the dependencies, tests, and builds the application and cleans everything.
 all:
-	ENVFILE=.env.example $(MAKE) deps test build pack clean
+	ENVFILE=.env.example $(MAKE) test build pack clean
 .PHONY: all
 
 ##################
@@ -32,12 +33,12 @@ deps: envfile
 .PHONY: deps
 
 # test tests the application
-test: envfile $(GOLANG_DEPS_DIR)
+test: envfile 
 	$(COMPOSE_RUN_GOLANG) make _test
 .PHONY: test
 
 # build creates the SAM artifact to be deployed
-build: envfile $(GOLANG_DEPS_DIR)
+build: envfile
 	$(COMPOSE_RUN_GOLANG) make _build
 .PHONY: build
 
@@ -83,12 +84,6 @@ shellAWS: envfile
 ###################
 # Private Targets #
 ###################
-
-# _depsGo installs go dependencies for the project
-_depsGo:
-	dep ensure
-.PHONY: _depsGo
-
 # _test tests the go source
 _test:
 	go test -v ./...
