@@ -8,7 +8,7 @@ services:
     working_dir: /opt/app
 
   aws:
-    image: contino/aws:1.16.116
+    image: contino/aws-cli:1.16.116
     env_file: .env
     working_dir: /opt/app
     volumes:

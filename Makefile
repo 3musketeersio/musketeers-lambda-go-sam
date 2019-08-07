@@ -2,6 +2,7 @@ BIN_DIR = bin
 
 COMPOSE_RUN_GOLANG = docker-compose run --rm golang
 COMPOSE_RUN_AWS = docker-compose run --rm aws
+COMPOSE_RUN_AUTH = docker-compose run --rm gauth
 
 STACK_NAME ?= $(ENV)-musketeers-lambda-go-sam
 SAM_S3_BUCKET ?= musketeers-lambda-go-sam
@@ -80,6 +81,10 @@ shellGolang: envfile
 shellAWS: envfile
 	$(COMPOSE_RUN_AWS) bash
 .PHONY: shellAWS
+
+auth: envfile
+	$(COMPOSE_RUN_AUTH)
+.PHONY: auth
 
 ###################
 # Private Targets #
