@@ -99,7 +99,7 @@ _build:
 	@for dir in $(wildcard functions/*/) ; do \
 		fxn=$$(basename $$dir) ; \
 		GOOS=linux go build -ldflags="-s -w" -o $(BIN_DIR)/$$fxn functions/$$fxn/*.go ; \
-		zip -m -D $(BIN_DIR)/$$fxn.zip $(BIN_DIR)/$$fxn ; \
+#		zip -m -D $(BIN_DIR)/$$fxn.zip $(BIN_DIR)/$$fxn ; \
 	done
 .PHONY: _build
 
