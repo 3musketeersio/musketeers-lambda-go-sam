@@ -33,6 +33,9 @@ build:
     - master
   script:
     - make build pack
+  variables:
+    SAM_S3_BUCKET: apac-dev-sam
+    AWS_DEFAULT_REGION: ap-southeast-2
 
 deploy_dev:
   stage: deploy_dev
@@ -45,11 +48,12 @@ deploy_dev:
   only:
     - master
   variables:
-    ENV: dev
+    ENV: gitlab-dev
     AWS_DEFAULT_REGION: ap-southeast-2
 
 deploy_qa:
   stage: deploy_qa
+  when: manual
   dependencies:
     - build
   script:
@@ -59,7 +63,7 @@ deploy_qa:
   only:
     - master
   variables:
-    ENV: qa
+    ENV: gitlab-qa
     AWS_DEFAULT_REGION: ap-southeast-2
 
 deploy_prod:
@@ -74,5 +78,5 @@ deploy_prod:
   only:
     - master
   variables:
-    ENV: prod
+    ENV: gitlab-prod
     AWS_DEFAULT_REGION: ap-southeast-2
