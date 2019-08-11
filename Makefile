@@ -27,11 +27,6 @@ endif
 .env:
 	cp -f .env.template .env
 
-# deps installs all dependencies for testing/building/deploying. This example only has golang dependencies
-deps: envfile
-	$(COMPOSE_RUN_GOLANG) make _depsGo
-.PHONY: deps
-
 # test tests the application
 test: envfile 
 	$(COMPOSE_RUN_GOLANG) make _test

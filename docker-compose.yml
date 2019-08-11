@@ -1,14 +1,14 @@
 version: '3.4'
 services:
   golang:
-    image: golang:1.12
+    image: lambci/lambda:build-go1.x
     env_file: .env
     volumes:
       - .:/opt/app
     working_dir: /opt/app
 
   aws:
-    image: contino/aws:1.16.116
+    image: contino/aws-cli:1.16.116
     env_file: .env
     working_dir: /opt/app
     volumes:
