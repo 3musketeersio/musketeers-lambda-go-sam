@@ -45,5 +45,5 @@ Resources:
 
 Outputs:
     EchoApi:
-      Description: !Sub API Gateway endpoint URL for ${StageName} stage for Echo function"
+      Description: "API Gateway endpoint URL for Echo function"
       Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${StageName}/echo/"

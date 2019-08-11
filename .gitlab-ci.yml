@@ -48,7 +48,7 @@ deploy_dev:
   only:
     - master
   variables:
-    ENV: gitlab-dev
+    ENV: dev
     AWS_DEFAULT_REGION: ap-southeast-2
 
 deploy_qa:
@@ -63,7 +63,7 @@ deploy_qa:
   only:
     - master
   variables:
-    ENV: gitlab-qa
+    ENV: qa
     AWS_DEFAULT_REGION: ap-southeast-2
 
 deploy_prod:
@@ -78,5 +78,5 @@ deploy_prod:
   only:
     - master
   variables:
-    ENV: gitlab-prod
+    ENV: prod
     AWS_DEFAULT_REGION: ap-southeast-2
