@@ -23,7 +23,7 @@ Resources:
       FunctionName: !Sub ${AWS::StackName}-echo
       Description: returns the value of environment variable ECHO_MESSAGE
       MemorySize: 128
-      CodeUri: ./bin/echo.zip
+      CodeUri: ./bin/echo
       Handler: echo
       Policies: 
         - AWSLambdaFullAccess
